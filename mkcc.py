@@ -94,8 +94,6 @@ def convert_csv_to_txt(csv_path, txt_path):
             txt_file.write(format_txt_section(
                 branch, chainage, tagged_coordinates))
 
-# 省略主函数和main函数...
-
 
 def main():
     if len(sys.argv) != 2:
@@ -103,6 +101,10 @@ def main():
         sys.exit(1)
     csv_file = sys.argv[1]
     txt_file = csv_file.replace('.csv', '.txt')
+    txt_folder = "../txt_files"
+    if not os.path.exists(txt_folder):
+        os.makedirs(txt_folder)
+    txt_file = os.path.join(txt_folder, os.path.basename(txt_file))
     convert_csv_to_txt(csv_file, txt_file)
     print(f"Converted {csv_file} to {txt_file}")
 
