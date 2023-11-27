@@ -1,5 +1,5 @@
-import sys
 import os
+import glob
 
 
 def insert_virtual_section(input_file, output_dir):
@@ -21,8 +21,10 @@ def insert_virtual_section(input_file, output_dir):
     # 插入虚拟断面到文件开始处
     modified_content = virtual_section + lines
     # 构建输出文件路径
-    output_file = os.path.join(output_dir, os.path.basename(
-        input_file).replace('.txt', '_v.txt'))
+    # output_file = os.path.join(output_dir, os.path.basename(
+    #     input_file).replace('.txt', '_v.txt'))
+    # no replace
+    output_file = os.path.join(output_dir, os.path.basename(input_file))
     # 确保输出目录存在
     os.makedirs(output_dir, exist_ok=True)
     # 保存修改后的文件
@@ -31,16 +33,18 @@ def insert_virtual_section(input_file, output_dir):
     print(f"文件已处理并保存为：{output_file}")
 
 
+def process_directory(input_dir, output_dir):
+    # 获取目录下所有文件
+    for input_file in glob.glob(os.path.join(input_dir, '*.txt')):
+        insert_virtual_section(input_file, output_dir)
+
+
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python chg_v_insert.py <input_file>")
-        sys.exit(1)
-    input_file = sys.argv[1]
-    output_dir = "../txt_v_files"
-    # if output_dir not exit create
+    input_dir = "../txt_files"
+    output_dir = "../txt_virtual_start"
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
-    insert_virtual_section(input_file, output_dir)
+    process_directory(input_dir, output_dir)
 
 
 if __name__ == "__main__":

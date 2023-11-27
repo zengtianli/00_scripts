@@ -1,37 +1,40 @@
-import csv
+import pandas as pd
 import os
 
+# 设置输入和输出文件夹的路径
+input_folder = '../txt_virtual_start'
+output_folder = '../txt_virtual_end'
 
-def extract_virtual_chainage(input_file):
-    virtual_chainage = []
-    with open(input_file, mode='r', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            # 检查是否为虚拟断面且chainage_v不为0
-            if row[0] == 'null' and row[3] != '0.000':
-                virtual_chainage.append(
-                    [os.path.basename(input_file).replace('_chg.csv', ''), row[1], row[3]])
-    return virtual_chainage
+# 确保输出文件夹存在
+os.makedirs(output_folder, exist_ok=True)
 
+# 读取CSV文件
+df = pd.read_csv('../all_end_virtuals.csv', header=None,
+                 names=['river', 'branch', 'chainage'])
 
-def main():
-    input_dir = '../chg_files/'
-    output_file = '../all_end_virtuals.csv'
-    all_virtual_chainage = []
+# 遍历每一行，生成对应的.txt文件名
+for index, row in df.iterrows():
+    txt_filename = f"{row['river'].split('_')[0]}_{row['branch']}.txt"
+    input_path = os.path.join(input_folder, txt_filename)
+    output_path = os.path.join(output_folder, txt_filename)
 
-    for filename in os.listdir(input_dir):
-        if filename.endswith(".csv"):
-            virtual_chainage = extract_virtual_chainage(
-                os.path.join(input_dir, filename))
-            all_virtual_chainage.extend(virtual_chainage)
+    try:
+        # 打开并读取对应的.txt文件
+        with open(input_path, 'r', encoding='utf-8') as file:
+            data = file.read()
 
-    with open(output_file, mode='w', encoding='utf-8', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(all_virtual_chainage)
+        # 分割断面数据
+        sections = data.split('*******************************')
+        last_section = sections[-2].strip()  # 获取最后一个完整的断面数据并移除首尾空白字符
 
-    print(f"Virtual chainage extracted to {output_file}")
+        # 将最后一个断面数据复制并追加到文件末尾
+        with open(output_path, 'w', encoding='utf-8') as file:
+            file.write(data + '\n' + last_section +
+                       '\n*******************************\n')
 
+        print(f"{txt_filename}: 断面数据已成功追加。")
 
-if __name__ == "__main__":
-    main()
+    except FileNotFoundError:
+        print(f"{txt_filename}: 文件未找到。")
 
+print("所有操作已完成。")
