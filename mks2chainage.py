@@ -44,4 +44,3 @@ if __name__ == "__main__":
     output_csv_file = '../chainage.csv'  # You can modify this if needed
     process_file(input_file_path, output_csv_file)
     print(f"Processed file: {input_file_path}")
-
