@@ -30,6 +30,6 @@ def rename_files_to_pinyin(directory):
 
 
 if __name__ == "__main__":
-    directory = "../csv_sections"  # 假设当前目录包含上述文件
+    directory = "../processed_data/csv_sections"  # 假设当前目录包含上述文件
     rename_files(directory)
     rename_files_to_pinyin(directory)

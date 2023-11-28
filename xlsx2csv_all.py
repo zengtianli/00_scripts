@@ -11,11 +11,12 @@ def xlsx_to_csv(xlsx_file_path, csv_file_path):
 
 
 # 设置输出目录为scripts同级的csv_files文件夹
-output_dir = os.path.join(os.path.dirname(__file__), '../csv_files')
+output_dir = os.path.join(os.path.dirname(
+    __file__), '../processed_data/csv_files')
 os.makedirs(output_dir, exist_ok=True)  # 创建目录，如果不存在
 
 # 遍历上级目录中的所有文件
-for dirpath, dirnames, filenames in os.walk('..'):
+for dirpath, dirnames, filenames in os.walk('../resources/'):
     for filename in filenames:
         if filename.endswith('.xlsx'):
             # 获取所在文件夹的编号（如 01, 02等）
@@ -30,4 +31,3 @@ for dirpath, dirnames, filenames in os.walk('..'):
             # 转换文件
             xlsx_to_csv(xlsx_file_path, csv_file_path)
             print(f"Converted '{xlsx_file_path}' to '{csv_file_path}'")
-

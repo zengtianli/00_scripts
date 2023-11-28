@@ -2,14 +2,14 @@ import pandas as pd
 import os
 
 # 设置输入和输出文件夹的路径
-input_folder = '../txt_virtual_start'
-output_folder = '../txt_virtual_end'
+input_folder = '../processed_data/txt_virtual_start'
+output_folder = '../processed_data/txt_virtual_end'
 
 # 确保输出文件夹存在
 os.makedirs(output_folder, exist_ok=True)
 
 # 读取CSV文件
-df = pd.read_csv('../all_end_virtuals.csv', header=None,
+df = pd.read_csv('../processed_data/all_end_virtuals.csv', header=None,
                  names=['river', 'branch', 'chainage'])
 
 # 遍历每一行，生成对应的.txt文件名

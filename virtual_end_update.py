@@ -2,8 +2,8 @@ import pandas as pd
 import os
 
 # 设置输入和输出文件夹的路径
-input_folder = '../txt_virtual_end'
-output_folder = '../txt_updated_files'
+input_folder = '../processed_data/txt_virtual_end'
+output_folder = '../processed_data/txt_updated_files'
 
 # 确保输出文件夹存在
 os.makedirs(output_folder, exist_ok=True)

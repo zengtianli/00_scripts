@@ -46,9 +46,8 @@ def main():
     section_file = sys.argv[1]
     # 从输入文件名中构造chainage文件名
     chainage_file = os.path.join(
-        '../00_chg_files', os.path.basename(section_file).replace('.csv', '_chg.csv'))
-    # output_dir is ../inserted_files if not exist create it
-    output_dir = '../inserted_files'
+        '../00_chg_files/', os.path.basename(section_file).replace('.csv', '_chg.csv'))
+    output_dir = '../processed_data/inserted_files'
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
     prefix = os.path.basename(section_file).split('_')[0]

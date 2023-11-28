@@ -16,7 +16,7 @@ def extract_virtual_chainage(input_file):
 
 def main():
     input_dir = '../00_chg_files/'
-    output_file = '../all_end_virtuals.csv'
+    output_file = '../processed_data/all_end_virtuals.csv'
     all_virtual_chainage = []
 
     for filename in os.listdir(input_dir):

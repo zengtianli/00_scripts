@@ -41,6 +41,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
     input_file_path = sys.argv[1]
-    output_csv_file = '../chainage.csv'  # You can modify this if needed
+    output_csv_file = '../processed_data/chainage.csv'  # You can modify this if needed
     process_file(input_file_path, output_csv_file)
     print(f"Processed file: {input_file_path}")
