@@ -9,7 +9,7 @@ output_folder = '../processed_data/txt_updated_files'
 os.makedirs(output_folder, exist_ok=True)
 
 # 读取CSV文件，并创建一个映射（文件名到chainage）
-df = pd.read_csv('../all_end_virtuals.csv', header=None,
+df = pd.read_csv('../processed_data/all_end_virtuals.csv', header=None,
                  names=['river', 'branch', 'chainage'])
 chainage_map = {f"{row['river'].split('_')[0]}_{row['branch']}.txt": row['chainage']
                 for index, row in df.iterrows()}

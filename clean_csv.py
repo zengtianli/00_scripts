@@ -35,7 +35,7 @@ def main():
 
     input_file = sys.argv[1]
     output_dir = os.path.join(os.path.dirname(
-        input_file), '../processed_data/inst_cle_files')
+        input_file), '../inst_cle_files')
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     output_file = os.path.join(output_dir, os.path.basename(input_file))

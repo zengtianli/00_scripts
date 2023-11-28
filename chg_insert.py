@@ -53,7 +53,7 @@ def main():
     prefix = os.path.basename(section_file).split('_')[0]
     chainage_data = load_chainage_data(chainage_file)
     process_section_file(section_file, chainage_data, output_dir, prefix)
-    print(f"Processed file: {section_file}")
+    print(f"Processed file: {section_file} stored in {output_dir}")
 
 
 if __name__ == "__main__":

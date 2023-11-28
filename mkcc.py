@@ -101,7 +101,7 @@ def main():
         sys.exit(1)
     csv_file = sys.argv[1]
     txt_file = csv_file.replace('.csv', '.txt')
-    txt_folder = "../txt_files"
+    txt_folder = "../processed_data/txt_files"
     if not os.path.exists(txt_folder):
         os.makedirs(txt_folder)
     txt_file = os.path.join(txt_folder, os.path.basename(txt_file))
